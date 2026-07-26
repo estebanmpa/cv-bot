@@ -26,7 +26,10 @@ jobs:
             git pull --rebase
 
             echo "Rebuilding application..."
-            docker compose -f docker-compose.prod.yml up -d --build cv-bot
+            docker compose -f docker-compose.prod.yml up -d --build cvbot-server
+
+            echo "Reload Nginx..."
+            docker exec reverse-proxy nginx -s reload
 
             echo "Cleaning unused images..."
             docker image prune -f

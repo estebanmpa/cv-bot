@@ -1,7 +1,7 @@
 name: cv-bot-local
 
 services:
-  cv-bot:
+  cvbot-server:
     container_name: cv-bot-container
     build:
       context: .
