@@ -11,10 +11,11 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT', 3000);
+  const port = Number(configService.get('PORT', 3000));
+  const host = configService.get<string>('HOST', '0.0.0.0');
 
-  await app.listen(port);
-  console.log(`Server running on http://localhost:${port}`);
+  await app.listen(port, host);
+  console.log(`Server running on http://${host}:${port}`);
 }
 
 bootstrap();

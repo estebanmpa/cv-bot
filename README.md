@@ -1,25 +1,39 @@
 # cv-bot
 
-Base de chatbot NestJS con un endpoint POST `/chat` que usa Claude para generar respuestas.
+A NestJS chatbot backend that receives WhatsApp messages and uses Claude to generate responses.
 
-## Instalación
+## Installation
 
 ```bash
 yarn install
 ```
 
-## Ejecutar en desarrollo
+## Run in development
 
 ```bash
 cp .env.example .env
-# completar ANTHROPIC_API_KEY en .env
+# fill in the environment variables in .env
 yarn start:dev
 ```
 
-## Probar el endpoint
+## Run with Docker Compose
+
+### Development
 
 ```bash
-curl -X POST http://localhost:3000/chat \
+docker compose up --build -d
+```
+
+### Production
+
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+## Test the endpoint
+
+```bash
+curl -X POST http://localhost:3000/webhook \
   -H "Content-Type: application/json" \
-  -d '{"message":"Hola, ¿puedes presentarte?"}'
+  -d '{"message":"Hello, can you introduce yourself?"}'
 ```

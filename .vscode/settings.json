@@ -3,6 +3,7 @@
         "/^node --version && npm --version && yarn --version$/": {
             "approve": true,
             "matchCommandLine": true
-        }
+        },
+        "docker compose": true
     }
 }

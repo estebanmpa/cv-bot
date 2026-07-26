@@ -9,8 +9,8 @@ import {
     Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ClaudeService } from 'src/services/claude.service';
-import { WhatsappService } from 'src/services/whatsapp.service';
+import { ClaudeService } from '../services/claude.service';
+import { WhatsappService } from '../services/whatsapp.service';
 
 @Controller('webhooks')
 export class WebhookController {
