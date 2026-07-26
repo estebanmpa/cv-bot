@@ -42,6 +42,8 @@ export class WebhookController {
         // We respond 200 immediately so that Meta does not retry the webhook
         res.status(HttpStatus.OK).send();
 
+        this.logger.log(`receiveWhatsappMessage: ${JSON.stringify(body)}`);
+        
         try {
             const entry = body?.entry?.[0];
             const change = entry?.changes?.[0];
@@ -55,7 +57,7 @@ export class WebhookController {
             const from = message.from; // número del usuario
             const userText = message.text.body;
 
-            this.logger.log(`Mensaje de ${from}: ${userText}`);
+            this.logger.log(`Message from ${from}: ${userText}`);
 
             const reply = await this.claudeService.replyToMessage(userText);
             await this.whatsappService.sendMessage(from, reply);
