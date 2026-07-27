@@ -1,19 +1,30 @@
-name: cv-bot-prod
+name: cvbot-prod
 
 services:
   cvbot-server:
-    container_name: cvbot-container
+    container_name: cvbot-backend-container
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile.prod
     restart: unless-stopped
     env_file:
-      - .env
+      - ./backend/.env
     expose:
       - "3000"
     networks:
       - proxy-network
       - cvbot-private-network
+
+  cvbot-www:
+    container_name: cvbot-frontend-container
+    build:
+      context: ./www
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    env_file:
+      - ./www/.env
+    networks:
+      - proxy-network
 
 networks:
   proxy-network:

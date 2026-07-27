@@ -1,13 +1,24 @@
-name: cv-bot-local
+name: cvbot-local
 
 services:
   cvbot-server:
-    container_name: cv-bot-container
+    container_name: cvbot-container
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - ./backend/.env
     restart: unless-stopped
+
+  cvbot-www:
+    container_name: cvbot-frontend-container
+    build:
+      context: ./www
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    env_file:
+      - ./www/.env

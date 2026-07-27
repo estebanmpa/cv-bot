@@ -3,9 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { ClaudeService } from './services/claude.service';
 import { WebhookController } from './controllers/webhook.controller';
 import { WhatsappService } from './services/whatsapp.service';
+import { ChatController } from './controllers/chat.controller';
 
 const controllers = [
-  // ChatController, disabled because we are using the webhook for WhatsApp messages
+  ChatController,
   WebhookController
 ];
 
