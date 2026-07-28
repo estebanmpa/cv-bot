@@ -15,8 +15,14 @@ import {
 import { IconMessageCircle, IconSend } from '@tabler/icons-react'
 import { useSendChatMessage } from '../mutations/useSendChatMessage'
 
+const MAX_MESSAGE_LENGTH = 100
+
 const chatSchema = z.object({
-  message: z.string().trim().min(1, 'Write a message before sending'),
+  message: z
+    .string()
+    .trim()
+    .min(1, 'Write a message before sending')
+    .max(MAX_MESSAGE_LENGTH, `Message can't exceed ${MAX_MESSAGE_LENGTH} characters`),
 })
 
 type ChatFormValues = z.infer<typeof chatSchema>
@@ -49,11 +55,14 @@ export function ChatWindow() {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<ChatFormValues>({
     resolver: zodResolver(chatSchema),
     defaultValues: { message: '' },
   })
+
+  const messageLength = watch('message')?.length ?? 0
 
   function onSubmit(values: ChatFormValues) {
     setHistory((current) => [
@@ -127,6 +136,7 @@ export function ChatWindow() {
               autosize
               minRows={1}
               maxRows={4}
+              maxLength={MAX_MESSAGE_LENGTH}
               style={{ flex: 1 }}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' && !event.shiftKey) {
@@ -143,11 +153,18 @@ export function ChatWindow() {
               Send
             </Button>
           </Group>
-          {errors.message && (
-            <Text size="xs" c="red">
-              {errors.message.message}
+          <Group justify="space-between" gap="xs">
+            {errors.message ? (
+              <Text size="xs" c="red">
+                {errors.message.message}
+              </Text>
+            ) : (
+              <span />
+            )}
+            <Text size="xs" c={messageLength > MAX_MESSAGE_LENGTH ? 'red' : 'dimmed'}>
+              {messageLength}/{MAX_MESSAGE_LENGTH}
             </Text>
-          )}
+          </Group>
         </Stack>
       </form>
     </Paper>
