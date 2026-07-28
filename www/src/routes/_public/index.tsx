@@ -10,6 +10,7 @@ import {
   Text,
   Title,
 } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { ChatWindow } from '../../components/ChatWindow'
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle'
 import { SocialLinks } from '../../components/SocialLinks'
@@ -20,23 +21,29 @@ export const Route = createFileRoute('/_public/')({
 })
 
 function HomePage() {
+  const isMobile = useMediaQuery('(max-width: 48em)')
+
   return (
     <Box
       style={{
         minHeight: '100vh',
-        background:
-          'radial-gradient(circle at top, var(--mantine-color-violet-1) 0%, var(--mantine-color-body) 55%)',
+        background: 'var(--mantine-color-body)',
       }}
     >
       <Container size="lg" py="xl">
-        <Paper radius="lg" shadow="md" p="xl" withBorder>
+        <Paper
+          radius={isMobile ? 0 : 'lg'}
+          shadow={isMobile ? 'none' : 'md'}
+          p={isMobile ? 0 : 'xl'}
+          withBorder={!isMobile}
+        >
           <Group justify="space-between" align="flex-start" mb="xl" wrap="wrap">
             <Group align="center" gap="md">
               <Avatar color="violet" radius="xl" size="lg">
                 EP
               </Avatar>
               <Stack gap={2}>
-                <Title order={2}>Esteban Piga Alessi</Title>
+                <Title order={2}>Esteban Mariano Piga Alessi</Title>
                 <Text c="dimmed">
                   Professional presentation, social links, and chat with my virtual assistant.
                 </Text>
