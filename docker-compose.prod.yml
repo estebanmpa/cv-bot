@@ -26,6 +26,21 @@ services:
     networks:
       - proxy-network
 
+  cvbot-cache:
+    image: redis:7-alpine
+    container_name: cvbot-cache-container
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - cvbot-redis-volume:/data
+    networks:
+      - cvbot-private-network
+    ports:
+      - "127.0.0.1:6381:6379"
+
+volumes:
+  cvbot-redis-volume:
+
 networks:
   proxy-network:
     external: true

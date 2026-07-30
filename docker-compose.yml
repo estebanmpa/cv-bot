@@ -18,7 +18,20 @@ services:
       context: ./www
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 4000:4000
     restart: unless-stopped
     env_file:
       - ./www/.env
+
+  cvbot-cache:
+    image: redis
+    container_name: cvbot-cache-container
+    restart: unless-stopped
+    volumes:
+      - cvbot-redis-volume:/data
+    ports:
+      - 6381:6379
+    command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  cvbot-redis-volume:
