@@ -11,6 +11,8 @@ services:
     env_file:
       - ./backend/.env
     restart: unless-stopped
+    depends_on:
+      - cvbot-cache
 
   cvbot-www:
     container_name: cvbot-frontend-container

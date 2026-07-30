@@ -14,6 +14,8 @@ services:
     networks:
       - proxy-network
       - cvbot-private-network
+    depends_on:
+      - cvbot-cache
 
   cvbot-www:
     container_name: cvbot-frontend-container
