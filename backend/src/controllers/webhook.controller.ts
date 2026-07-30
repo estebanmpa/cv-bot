@@ -12,6 +12,8 @@ import { Response } from 'express';
 import { ClaudeService } from '../services/claude.service';
 import { WhatsappService } from '../services/whatsapp.service';
 import { TelegramService } from '../services/telegram.service';
+import { WhatsappWebhookDto } from '../models/dto/whatsapp-webhook.dto';
+import { TelegramWebhookDto } from '../models/dto/telegram-webhook.dto';
 
 @Controller('webhooks')
 export class WebhookController {
@@ -40,7 +42,7 @@ export class WebhookController {
 
     // This endpoint is called by Meta (WhatsApp) every time a new message is received. It is the webhook that receives incoming messages.
     @Post('whatsapp')
-    async receiveWhatsappMessage(@Body() body: any, @Res() res: Response) {
+    async receiveWhatsappMessage(@Body() body: WhatsappWebhookDto, @Res() res: Response) {
         // We respond 200 immediately so that Meta does not retry the webhook
         res.status(HttpStatus.OK).send();
 
@@ -52,7 +54,7 @@ export class WebhookController {
             const message = change?.value?.messages?.[0];
 
             // The webhook may arrive without a message (e.g., read receipts), we ignore it.
-            if (!message || message.type !== 'text') {
+            if (!message || message.type !== 'text' || !message.text) {
                 return;
             }
 
@@ -70,7 +72,7 @@ export class WebhookController {
 
     // This endpoint is called by Telegram every time a new message is received. It is the webhook that receives incoming messages.
     @Post('telegram')
-    async receiveTelegramMessage(@Body() body: any, @Res() res: Response) {
+    async receiveTelegramMessage(@Body() body: TelegramWebhookDto, @Res() res: Response) {
         // We respond 200 immediately so that Telegram does not retry the webhook
         res.status(HttpStatus.OK).send();
 
@@ -80,7 +82,7 @@ export class WebhookController {
             const message = body?.message;
 
             // The webhook may arrive without a text message (e.g., stickers, edits), we ignore it.
-            if (!message || typeof message.text !== 'string') {
+            if (!message || typeof message.text !== 'string' || !message.chat) {
                 return;
             }
 
