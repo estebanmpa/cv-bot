@@ -32,7 +32,7 @@ export class WhatsappService {
         },
       );
     } catch (error) {
-      this.logger.error('Error enviando mensaje a WhatsApp', error);
+      this.logger.error('Error sending message to WhatsApp', error);
     }
   }
 }
