@@ -14,6 +14,7 @@ import { useMediaQuery } from '@mantine/hooks'
 import { ChatWindow } from '../../components/ChatWindow'
 import { ColorSchemeToggle } from '../../components/ColorSchemeToggle'
 import { SocialLinks } from '../../components/SocialLinks'
+import { TelegramQr } from '../../components/TelegramQr'
 import { WhatsappQr } from '../../components/WhatsappQr'
 
 export const Route = createFileRoute('/_public/')({
@@ -59,7 +60,14 @@ function HomePage() {
               <ChatWindow />
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 5 }} h={480}>
-              <WhatsappQr />
+              <Stack h="100%" gap="md">
+                <Box style={{ flex: 1, minHeight: 0 }}>
+                  <WhatsappQr />
+                </Box>
+                <Box style={{ flex: 1, minHeight: 0 }}>
+                  <TelegramQr />
+                </Box>
+              </Stack>
             </Grid.Col>
           </Grid>
         </Paper>
