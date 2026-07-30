@@ -49,6 +49,7 @@ function createBotErrorEntry(): ChatEntry {
 
 export function ChatWindow() {
   const [history, setHistory] = useState<ChatEntry[]>([welcomeMessage])
+  const [chatId] = useState(() => crypto.randomUUID())
   const sendMessage = useSendChatMessage()
 
   const {
@@ -71,7 +72,7 @@ export function ChatWindow() {
     ])
     reset()
 
-    sendMessage.mutate(values.message, {
+    sendMessage.mutate({ message: values.message, chatId }, {
       onSuccess: (data) => {
         setHistory((current) => [
           ...current,

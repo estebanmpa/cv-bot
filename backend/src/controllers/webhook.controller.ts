@@ -61,7 +61,7 @@ export class WebhookController {
 
             this.logger.log(`Message from ${from}: ${userText}`);
 
-            const reply = await this.claudeService.replyToMessage(userText);
+            const reply = await this.claudeService.replyToMessage(userText, from);
             await this.whatsappService.sendMessage(from, reply);
         } catch (error) {
             this.logger.error('Error processing incoming message', error);
@@ -89,7 +89,7 @@ export class WebhookController {
 
             this.logger.log(`Message from ${chatId}: ${userText}`);
 
-            const reply = await this.claudeService.replyToMessage(userText);
+            const reply = await this.claudeService.replyToMessage(userText, String(chatId));
             await this.telegramService.sendMessage(chatId, reply);
         } catch (error) {
             this.logger.error('Error processing incoming message', error);

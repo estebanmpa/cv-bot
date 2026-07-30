@@ -4,6 +4,7 @@ import { ClaudeService } from './services/claude.service';
 import { WebhookController } from './controllers/webhook.controller';
 import { WhatsappService } from './services/whatsapp.service';
 import { TelegramService } from './services/telegram.service';
+import { RedisService } from './services/redis.service';
 import { ChatController } from './controllers/chat.controller';
 
 const controllers = [
@@ -13,7 +14,7 @@ const controllers = [
 
 @Module({
   controllers: [...controllers],
-  providers: [ClaudeService, WhatsappService, TelegramService],
+  providers: [ClaudeService, WhatsappService, TelegramService, RedisService],
   imports: [
     ConfigModule.forRoot({ isGlobal: true })
   ],

@@ -4,11 +4,11 @@ export interface ChatReply {
   reply: string
 }
 
-export async function sendChatMessage(message: string): Promise<ChatReply> {
+export async function sendChatMessage(message: string, chatId: string): Promise<ChatReply> {
   const response = await fetch(`${API_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, chatId }),
   })
 
   if (!response.ok) {
