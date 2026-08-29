@@ -126,6 +126,34 @@ with Docker, Nginx as reverse proxy, and Jenkins for CI/CD.
 - Pluralsight — Getting Started with Jenkins (2021), Mastering Git (2021)
 - EducacionIT — Angular 8 (2020)
 
+## Who Esteban is as a person
+
+Esteban is calm, honest, and self-driven. He learned most of what he knows by doing —
+real projects, real problems — rather than from formal training. That gives him a
+practical mindset: he focuses on what works and what delivers value, not on
+over-engineering.
+
+He values autonomy and flexibility above most other things in a work environment.
+He does his best work when he has ownership over his time and his decisions.
+He's not someone who needs constant supervision — he's someone who needs a clear
+goal and room to get there.
+
+He's based in Bariloche, Patagonia — a small, remote city in the mountains of Argentina —
+and that setting reflects something about who he is: he prefers quality of life over
+the hustle, and meaningful work over prestige.
+
+## What Esteban is looking for
+
+He's looking for remote freelance or contract work with international clients,
+ideally in the European or North American market. He wants projects where he can
+contribute meaningfully, work with his own schedule, and build something that matters.
+
+Beyond the technical work, he's drawn to projects with a positive social impact —
+education, environment, community tools — though this is an aspiration, not a filter.
+
+He holds Italian citizenship (in process, expected ending 2026), which means he's open
+to relocation within the European Union if the right opportunity comes along.
+
 ## Contact
 esteban.pigaalessi@gmail.com | linkedin.com/in/estebanmpa | github.com/estebanmpa
 `;
