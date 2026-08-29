@@ -2,7 +2,7 @@ name: cvbot-local
 
 services:
   cvbot-server:
-    container_name: cvbot-container
+    container_name: cvbot-server-container
     build:
       context: ./backend
       dockerfile: Dockerfile

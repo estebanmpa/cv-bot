@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useState } from 'react'
 import {
+  Anchor,
   Button,
   Group,
   Paper,
@@ -37,6 +38,26 @@ const welcomeMessage: ChatEntry = {
   id: 'welcome',
   role: 'bot',
   text: "Hi 👋 I'm Esteban's virtual assistant. Ask me about his experience, stack, or availability.",
+}
+
+// The backend prefixes a message with this token when its body is a bare URL that
+// should be rendered as a link (webchat renders HTML, unlike WhatsApp/Telegram).
+const LINK_TOKEN = '[[LINK]]'
+
+function MessageBody({ text }: { text: string }) {
+  if (text.startsWith(LINK_TOKEN)) {
+    const url = text.slice(LINK_TOKEN.length).trim()
+
+    return (
+      <Text size="sm">
+        <Anchor href={url} target="_blank" rel="noopener noreferrer">
+          Link
+        </Anchor>
+      </Text>
+    )
+  }
+
+  return <Text size="sm">{text}</Text>
 }
 
 function createBotErrorEntry(): ChatEntry {
@@ -76,7 +97,11 @@ export function ChatWindow() {
       onSuccess: (data) => {
         setHistory((current) => [
           ...current,
-          { id: crypto.randomUUID(), role: 'bot', text: data.reply },
+          ...data.replies.map((text) => ({
+            id: crypto.randomUUID(),
+            role: 'bot' as const,
+            text,
+          })),
         ])
       },
       onError: () => {
@@ -117,7 +142,7 @@ export function ChatWindow() {
               <Text size="xs" fw={700} c={entry.role === 'bot' ? 'violet' : 'dimmed'}>
                 {entry.role === 'bot' ? 'Bot' : 'You'}
               </Text>
-              <Text size="sm">{entry.text}</Text>
+              <MessageBody text={entry.text} />
             </Paper>
           ))}
           {sendMessage.isPending && (

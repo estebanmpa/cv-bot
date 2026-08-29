@@ -22,15 +22,26 @@ A PDF resume is read once and forgotten. This is a small product that demonstrat
 
 ## How it works
 
-```
-                        ┌──────────────────────────┐
-   Web chat widget ───▶ │                          │
-                        │   backend (NestJS API)   │──▶ Anthropic Claude
-   WhatsApp webhook ──▶ │                          │       (chat completion)
-                        │  - Chat / webhook routes │
-   Telegram webhook ──▶ │  - Conversation history  │──▶ Redis
-                        │                          │     (24h TTL, per chat)
-                        └──────────────────────────┘
+```mermaid
+flowchart LR
+    web[Web chat widget]
+    wa[WhatsApp webhook]
+    tg[Telegram webhook]
+
+    subgraph backend[backend - NestJS API]
+        routes[Chat / webhook routes]
+        history[Conversation history]
+    end
+
+    claude[Anthropic Claude<br/>chat completion]
+    redis[(Redis<br/>24h TTL, per chat)]
+
+    web --> routes
+    wa --> routes
+    tg --> routes
+    routes --> history
+    routes --> claude
+    history <--> redis
 ```
 
 1. A message arrives — either typed into the web widget, sent to the WhatsApp number, or sent to the Telegram bot.
