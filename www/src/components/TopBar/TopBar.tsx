@@ -6,7 +6,7 @@ import classes from './TopBar.module.css'
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: IconHome, collapseOnMobile: true },
-  { to: '/chat', label: 'Chat profile', icon: IconMessageChatbot, collapseOnMobile: false },
+  { to: '/chat', label: 'Chat profile', icon: IconMessageChatbot, collapseOnMobile: true },
 ] as const
 
 export function TopBar() {
