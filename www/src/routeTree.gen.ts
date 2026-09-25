@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicChatRouteImport } from './routes/_public/chat'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -21,24 +22,32 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicChatRoute = PublicChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => PublicRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
+  '/chat': typeof PublicChatRoute
 }
 export interface FileRoutesByTo {
+  '/chat': typeof PublicChatRoute
   '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
+  '/_public/chat': typeof PublicChatRoute
   '/_public/': typeof PublicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_public' | '/_public/'
+  to: '/chat' | '/'
+  id: '__root__' | '/_public' | '/_public/chat' | '/_public/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,14 +70,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/chat': {
+      id: '/_public/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof PublicChatRouteImport
+      parentRoute: typeof PublicRoute
+    }
   }
 }
 
 interface PublicRouteChildren {
+  PublicChatRoute: typeof PublicChatRoute
   PublicIndexRoute: typeof PublicIndexRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
+  PublicChatRoute: PublicChatRoute,
   PublicIndexRoute: PublicIndexRoute,
 }
 

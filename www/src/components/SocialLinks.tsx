@@ -25,7 +25,6 @@ export function SocialLinks() {
         target="_blank"
         rel="noreferrer"
         variant="light"
-        color="dark"
         leftSection={<IconBrandGithub size={18} />}
       >
         GitHub

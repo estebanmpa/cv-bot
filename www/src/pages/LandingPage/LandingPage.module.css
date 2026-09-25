@@ -1,0 +1,92 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  overflow: hidden;
+  background: radial-gradient(
+      ellipse at top,
+      light-dark(rgba(121, 53, 250, 0.08), rgba(121, 53, 250, 0.16)),
+      transparent 60%
+    ),
+    var(--mantine-color-body);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.gradientText {
+  background: linear-gradient(
+    90deg,
+    var(--mantine-color-violet-5),
+    var(--mantine-color-cyan-5),
+    var(--mantine-color-violet-5)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+.cta {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  @mixin hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(121, 53, 250, 0.6);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  &:nth-child(2) {
+    animation-delay: 100ms;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 200ms;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 300ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .gradientText {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}

@@ -42,7 +42,7 @@ and other visitors about his professional profile, acting as his "living resume"
 
 const PROFILE_CONTEXT = `
 ## Summary
-Esteban is a fullstack developer with 17 years of experience, based in San Carlos de
+Esteban is a fullstack developer with 20 years of experience in tech, based in San Carlos de
 Bariloche, Argentina. He started out working mostly with relational databases, co-founded
 a software company for a few years, and has since built strong expertise in Node.js and
 React ecosystems. He's AWS Certified Cloud Practitioner and is currently upskilling in
