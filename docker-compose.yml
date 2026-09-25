@@ -1,5 +1,12 @@
 name: cvbot-local
 
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+    compress: "true"
+
 services:
   cvbot-server:
     container_name: cvbot-container
@@ -11,6 +18,7 @@ services:
     env_file:
       - ./backend/.env
     restart: unless-stopped
+    logging: *default-logging
 
   cvbot-www:
     container_name: cvbot-frontend-container
@@ -20,6 +28,7 @@ services:
     ports:
       - 4000:4000
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ./www/.env
 
@@ -27,6 +36,7 @@ services:
     image: redis
     container_name: cvbot-cache-container
     restart: unless-stopped
+    logging: *default-logging
     volumes:
       - cvbot-redis-volume:/data
     ports:

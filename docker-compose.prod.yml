@@ -1,5 +1,12 @@
 name: cvbot-prod
 
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+    compress: "true"
+
 services:
   cvbot-server:
     container_name: cvbot-backend-container
@@ -7,6 +14,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ./backend/.env
     expose:
@@ -21,6 +29,7 @@ services:
       context: ./www
       dockerfile: Dockerfile.prod
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ./www/.env
     networks:
@@ -30,6 +39,7 @@ services:
     image: redis:7-alpine
     container_name: cvbot-cache-container
     restart: unless-stopped
+    logging: *default-logging
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - cvbot-redis-volume:/data
