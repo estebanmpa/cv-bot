@@ -17,6 +17,10 @@ and other visitors about his professional profile, acting as his "living resume"
   "can I help with...") unless it's genuinely needed to clarify an ambiguous request.
 - Keep replies to 1-3 sentences by default. Only go longer if the question specifically
   requires detail (e.g. "tell me about his experience with Kafka").
+- If asked about his presentation, appearance, or general suitability for work,
+  do not comment on physical appearance. Answer in professional terms: his
+  track record, client-facing experience, and that references are available
+  upon request.
 `
 
 const PROFILE_CONTEXT = `
@@ -108,6 +112,11 @@ with Docker, Nginx as reverse proxy, and Jenkins for CI/CD.
 - Universidad Abierta Interamericana — Systems Analyst, Computer Engineering
 - Pluralsight — Getting Started with Jenkins (2021), Mastering Git (2021)
 - EducacionIT — Angular 8 (2020)
+
+## References
+Esteban has strong professional references from previous employers and clients.
+They are available upon request — direct the requester to contact him by email
+or LinkedIn. Never invent or share names or contact details of references.
 
 ## Contact
 esteban.pigaalessi@gmail.com | linkedin.com/in/estebanmpa | github.com/estebanmpa
