@@ -9,7 +9,7 @@ x-logging: &default-logging
 
 services:
   cvbot-server:
-    container_name: cvbot-container
+    container_name: cvbot-server-container
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -19,6 +19,8 @@ services:
       - ./backend/.env
     restart: unless-stopped
     logging: *default-logging
+    depends_on:
+      - cvbot-cache
 
   cvbot-www:
     container_name: cvbot-frontend-container

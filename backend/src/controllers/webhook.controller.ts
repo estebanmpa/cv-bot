@@ -9,7 +9,7 @@ import {
     Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ClaudeService } from '../services/claude.service';
+import { ClaudeService, splitReply } from '../services/claude.service';
 import { WhatsappService } from '../services/whatsapp.service';
 import { TelegramService } from '../services/telegram.service';
 import { WhatsappWebhookDto } from '../models/dto/whatsapp-webhook.dto';
@@ -63,8 +63,10 @@ export class WebhookController {
 
             this.logger.log(`Message from ${from}: ${userText}`);
 
-            const reply = await this.claudeService.replyToMessage(userText, from);
-            await this.whatsappService.sendMessage(from, reply);
+            const reply = await this.claudeService.replyToMessage(userText, from, 'whatsapp');
+            for (const part of splitReply(reply)) {
+                await this.whatsappService.sendMessage(from, part);
+            }
         } catch (error) {
             this.logger.error('Error processing incoming message', error);
         }
@@ -91,8 +93,10 @@ export class WebhookController {
 
             this.logger.log(`Message from ${chatId}: ${userText}`);
 
-            const reply = await this.claudeService.replyToMessage(userText, String(chatId));
-            await this.telegramService.sendMessage(chatId, reply);
+            const reply = await this.claudeService.replyToMessage(userText, String(chatId), 'telegram');
+            for (const part of splitReply(reply)) {
+                await this.telegramService.sendMessage(chatId, part);
+            }
         } catch (error) {
             this.logger.error('Error processing incoming message', error);
         }

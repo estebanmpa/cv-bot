@@ -61,9 +61,11 @@ function HomePage() {
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 5 }} h={480}>
               <Stack h="100%" gap="md">
+                {/*
                 <Box style={{ flex: 1, minHeight: 0 }}>
                   <WhatsappQr />
                 </Box>
+                */}
                 <Box style={{ flex: 1, minHeight: 0 }}>
                   <TelegramQr />
                 </Box>
