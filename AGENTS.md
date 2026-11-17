@@ -42,6 +42,11 @@ This document defines the coding standards and architectural patterns for the `w
 ## General Guidelines
 - Use **yarn** for package management.
 - Ensure all new features are covered by basic unit tests.
+- **Always bump the semantic version** in `package.json` of every project a
+  change touches (`backend`, `www`), as part of the same change:
+  - **minor** for new features (0.1.0 → 0.2.0),
+  - **patch** for fixes (0.1.0 → 0.1.1),
+  - **major** only for breaking changes.
 
 ---
 
