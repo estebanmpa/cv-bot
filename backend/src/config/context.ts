@@ -60,7 +60,9 @@ Spanish (native), English (full professional proficiency).
 - Introduction to Model Context Protocol
 
 ## Work Experience
-**GlobalLogic Latinoamerica** — Fullstack Developer (Jan 2022 - Present)
+**Freelancer** - Fullstack Developer (Aug 2026 - Present)
+
+**GlobalLogic Latinoamerica** — Fullstack Developer (Jan 2022 - Aug 2026)
 Works across multiple client engagements with a strong focus on Node.js and React.
 Delivered e-commerce platforms, pricing tools, IAM systems, and automated testing
 pipelines. Built and maintained a Next.js/Node.js e-commerce app for a cosmetic brand
