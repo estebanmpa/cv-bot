@@ -28,7 +28,7 @@ export class ClaudeService {
         private readonly configService: ConfigService,
         private readonly redisService: RedisService,
     ) {
-        const apiKey = this.configService.get<string>('ANTHROPIC_API_KEY');
+        const apiKey = this.configService.get<string>('anthropic.apiKey');
         this.anthropicClient = new Anthropic({ apiKey });
     }
 
@@ -43,7 +43,7 @@ export class ClaudeService {
             ];
 
             const response: Message = await this.anthropicClient.messages.create({
-                model: this.configService.get<string>('LLM_MODEL')!,
+                model: this.configService.getOrThrow<string>('anthropic.model'),
                 max_tokens: 500,
                 system: SYSTEM_CONTEXT,
                 messages,

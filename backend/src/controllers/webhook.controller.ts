@@ -8,6 +8,7 @@ import {
     HttpStatus,
     Logger,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { ClaudeService, splitReply } from '../services/claude.service';
 import { WhatsappService } from '../services/whatsapp.service';
@@ -23,6 +24,7 @@ export class WebhookController {
         private readonly claudeService: ClaudeService,
         private readonly whatsappService: WhatsappService,
         private readonly telegramService: TelegramService,
+        private readonly configService: ConfigService,
     ) { }
 
     // Meta calls this endpoint once to verify the webhook when configuring it
@@ -32,7 +34,7 @@ export class WebhookController {
         const token = query['hub.verify_token'];
         const challenge = query['hub.challenge'];
 
-        if (mode === 'subscribe' && token === process.env.WHATSAPP_VERIFY_TOKEN) {
+        if (mode === 'subscribe' && token === this.configService.get<string>('whatsapp.webhookVerifyToken')) {
             this.logger.log('Webhook verified successfully');
             return res.status(HttpStatus.OK).send(challenge);
         }

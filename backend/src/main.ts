@@ -12,11 +12,11 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
-  const port = Number(configService.get('PORT', 3000));
-  const host = configService.get<string>('HOST', '0.0.0.0');
+  const port = configService.getOrThrow<number>('port');
+  const host = configService.getOrThrow<string>('host');
 
   app.enableCors({
-    origin: configService.get('CORS_ORIGINS').split(',').map((origin: string) => origin.trim()),
+    origin: configService.get<string[]>('cors.origins'),
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],

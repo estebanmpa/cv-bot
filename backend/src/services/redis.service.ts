@@ -1,13 +1,13 @@
-import { CACHE_MANAGER } from '@nestjs/cache-manager/dist/cache.constants';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { Cache } from 'cache-manager';
 
 export interface ChatMessage {
     role: 'user' | 'assistant';
     content: string;
 }
 
-const HISTORY_TTL_SECONDS = 60 * 60 * 24; // 24 hours
+// cache-manager v7 expects TTLs in milliseconds.
+const HISTORY_TTL_MS = 24 * 60 * 60 * 1000;
 const MAX_HISTORY_MESSAGES = 20; // last 10 user/assistant pairs
 
 @Injectable()
@@ -32,7 +32,7 @@ export class RedisService {
             await this.cache.set(
                 this.historyKey(from),
                 JSON.stringify(truncated),
-                HISTORY_TTL_SECONDS
+                HISTORY_TTL_MS
             );
         } catch (error) {
             this.logger.error(`Error saving history for ${from}`, error as Error);

@@ -6,6 +6,7 @@ import { WhatsappService } from './services/whatsapp.service';
 import { TelegramService } from './services/telegram.service';
 import { ChatController } from './controllers/chat.controller';
 import { RedisCacheModule } from './config/cache/redis/redis-cache.module';
+import configuration from './config/configuration';
 
 const controllers = [
   ChatController,
@@ -16,7 +17,7 @@ const controllers = [
   controllers: [...controllers],
   providers: [ClaudeService, WhatsappService, TelegramService],
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     RedisCacheModule
   ],
 })
