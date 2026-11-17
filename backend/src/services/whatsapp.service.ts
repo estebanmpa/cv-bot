@@ -9,9 +9,9 @@ export class WhatsappService {
   private readonly token: string;
 
   constructor(private readonly configService: ConfigService) {
-    const phoneNumberId = this.configService.getOrThrow<string>('WHATSAPP_PHONE_NUMBER_ID');
+    const phoneNumberId = this.configService.getOrThrow<string>('whatsapp.phoneNumberId');
     this.apiUrl = `https://graph.facebook.com/v20.0/${phoneNumberId}/messages`;
-    this.token = this.configService.getOrThrow<string>('WHATSAPP_TOKEN');
+    this.token = this.configService.getOrThrow<string>('whatsapp.accessToken');
   }
 
   async sendMessage(to: string, text: string): Promise<void> {

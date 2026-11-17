@@ -1,0 +1,41 @@
+.page {
+  position: relative;
+  min-height: calc(100dvh - 60px);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at top right,
+      light-dark(rgba(121, 53, 250, 0.1), rgba(121, 53, 250, 0.2)),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at bottom left,
+      light-dark(rgba(21, 170, 191, 0.08), rgba(21, 170, 191, 0.14)),
+      transparent 55%
+    ),
+    var(--mantine-color-body);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--mantine-spacing-xl);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    padding-block: calc(var(--mantine-spacing-xl) * 2);
+  }
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.gradientText {
+  background: linear-gradient(90deg, var(--mantine-color-violet-5), var(--mantine-color-cyan-5));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -52,7 +52,7 @@ flowchart LR
 
 **Frontend (`www/`)** — React 18 + TypeScript, Vite, [Mantine v7](https://mantine.dev/) for UI, [TanStack Router](https://tanstack.com/router) and [TanStack Query](https://tanstack.com/query), React Hook Form + Zod for forms.
 
-**Backend (`backend/`)** — NestJS + TypeScript, [Anthropic SDK](https://www.npmjs.com/package/@anthropic-ai/sdk) (Claude), Redis (`ioredis`) for conversation history, Meta WhatsApp Cloud API and Telegram Bot API integrations.
+**Backend (`backend/`)** — NestJS + TypeScript, [Anthropic SDK](https://www.npmjs.com/package/@anthropic-ai/sdk) (Claude), Redis (`@keyv/redis`) for conversation history, Meta WhatsApp Cloud API and Telegram Bot API integrations.
 
 **Infra** — Docker & Docker Compose for local dev and production, GitHub Actions for CI/CD (deploys only the services whose files changed on push to `main`).
 
@@ -75,7 +75,7 @@ Each app has its own env file and its own README with more detail (see [`backend
 ```bash
 # Backend
 cd backend
-cp .env.example .env   # fill in ANTHROPIC_API_KEY, WhatsApp/Telegram tokens, Redis host, etc.
+cp .env.example .env   # fill in ANTHROPIC_API_KEY, WhatsApp/Telegram tokens, REDIS_URL, etc.
 yarn install
 yarn start:dev
 

@@ -1,0 +1,42 @@
+.page {
+  position: relative;
+  min-height: calc(100dvh - 60px);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at top left,
+      light-dark(rgba(121, 53, 250, 0.1), rgba(121, 53, 250, 0.2)),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      light-dark(rgba(21, 170, 191, 0.08), rgba(21, 170, 191, 0.14)),
+      transparent 55%
+    ),
+    var(--mantine-color-body);
+}
+
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--mantine-spacing-lg);
+  padding-block: var(--mantine-spacing-lg);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    grid-template-columns: 320px minmax(0, 1fr);
+    align-items: start;
+    height: calc(100dvh - 60px);
+    padding-block: var(--mantine-spacing-xl);
+  }
+}
+
+.chat {
+  height: min(75dvh, 680px);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    height: 100%;
+    min-height: 0;
+  }
+}

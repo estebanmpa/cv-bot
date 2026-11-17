@@ -1,0 +1,12 @@
+.glass {
+  border-radius: var(--mantine-radius-xl);
+  border: 1px solid light-dark(rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.08));
+  background-color: light-dark(
+    rgba(255, 255, 255, 0.72),
+    rgba(30, 31, 36, 0.6)
+  );
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 20px 50px -24px
+    light-dark(rgba(60, 40, 120, 0.25), rgba(0, 0, 0, 0.6));
+}

@@ -1,11 +1,12 @@
 import { Group, Text } from '@mantine/core'
 import { Link } from '@tanstack/react-router'
-import { IconHome, IconMessageChatbot } from '@tabler/icons-react'
+import { IconCode, IconHome, IconMessageChatbot } from '@tabler/icons-react'
 import { ColorSchemeToggle } from '../ColorSchemeToggle'
 import classes from './TopBar.module.css'
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: IconHome, collapseOnMobile: true },
+  { to: '/projects', label: 'Projects', icon: IconCode, collapseOnMobile: true },
   { to: '/chat', label: 'Chat profile', icon: IconMessageChatbot, collapseOnMobile: true },
 ] as const
 
