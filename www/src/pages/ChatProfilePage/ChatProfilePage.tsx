@@ -4,7 +4,7 @@ import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard'
 import classes from './ChatProfilePage.module.css'
 
-export function ChatProfilePage() {
+export function ChatProfilePage({ initialQuestion }: { initialQuestion?: string }) {
   return (
     <section className={classes.page}>
       <DotGrid />
@@ -12,7 +12,7 @@ export function ChatProfilePage() {
       <Container size="lg" className={classes.layout}>
         <ProfileCard />
         <div className={classes.chat}>
-          <ChatWindow />
+          <ChatWindow initialQuestion={initialQuestion} />
         </div>
       </Container>
     </section>

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicChatRouteImport } from './routes/_public/chat'
+import { Route as PublicProjectsRouteImport } from './routes/_public/projects'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -27,27 +28,40 @@ const PublicChatRoute = PublicChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicProjectsRoute = PublicProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => PublicRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/chat': typeof PublicChatRoute
+  '/projects': typeof PublicProjectsRoute
 }
 export interface FileRoutesByTo {
   '/chat': typeof PublicChatRoute
+  '/projects': typeof PublicProjectsRoute
   '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
   '/_public/chat': typeof PublicChatRoute
+  '/_public/projects': typeof PublicProjectsRoute
   '/_public/': typeof PublicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat'
+  fullPaths: '/' | '/chat' | '/projects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/chat' | '/'
-  id: '__root__' | '/_public' | '/_public/chat' | '/_public/'
+  to: '/chat' | '/projects' | '/'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/_public/chat'
+    | '/_public/projects'
+    | '/_public/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,16 +91,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicChatRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/projects': {
+      id: '/_public/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof PublicProjectsRouteImport
+      parentRoute: typeof PublicRoute
+    }
   }
 }
 
 interface PublicRouteChildren {
   PublicChatRoute: typeof PublicChatRoute
+  PublicProjectsRoute: typeof PublicProjectsRoute
   PublicIndexRoute: typeof PublicIndexRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicChatRoute: PublicChatRoute,
+  PublicProjectsRoute: PublicProjectsRoute,
   PublicIndexRoute: PublicIndexRoute,
 }
 

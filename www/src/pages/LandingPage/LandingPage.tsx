@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { Badge, Button, Container, Group, Stack, Text, Title } from '@mantine/core'
-import { IconMapPin, IconMessageChatbot } from '@tabler/icons-react'
+import { IconCode, IconMapPin, IconMessageChatbot } from '@tabler/icons-react'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { SocialLinks } from '../../components/SocialLinks'
 import classes from './LandingPage.module.css'
@@ -42,6 +42,17 @@ export function LandingPage() {
               className={classes.cta}
             >
               Chat with my profile
+            </Button>
+            <Button
+              component={Link}
+              to="/projects"
+              size="md"
+              radius="xl"
+              variant="default"
+              leftSection={<IconCode size={20} />}
+              className={classes.cta}
+            >
+              See what I'm building
             </Button>
             <SocialLinks />
           </Group>

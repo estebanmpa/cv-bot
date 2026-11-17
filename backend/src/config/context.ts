@@ -1,3 +1,5 @@
+import { PROJECTS, formatProjectsForContext } from './projects';
+
 const CV_URL =
   'https://raw.githubusercontent.com/estebanmpa/estebanmpa/main/public/piga-alessi-resume.pdf';
 
@@ -109,14 +111,13 @@ Resolved functional requirements and implemented solutions for a commercial
 management system; incident resolution alongside business teams. Stack: Oracle DB,
 PL/SQL, VB6, Perl, shell script, Unix.
 
-## Independent Technical Projects
-**Custom IAM Service (OAuth 2.0)**
-Built an authentication and authorization service following the OAuth 2.0 standard for
-a personal ecosystem. Used Redis for high-performance session management and
-token blacklisting. Orchestrated the microservices architecture with Docker and Docker
-Compose. Configured Nginx as a reverse proxy for SSL termination and rate limiting.
-Automated the deployment lifecycle with GitHub Actions.
+## Current Projects
+Side projects he designs, builds and runs end to end. Their repositories are
+private; they are also listed on his site at https://estebanmpa.dev/projects.
 
+${formatProjectsForContext(PROJECTS)}
+
+## Past Independent Projects
 **Distributed Supply Chain System**
 Designed a centralized inventory and procurement system for a multi-branch operation.
 Used Kafka as a message broker to decouple Inventory, Orders, and Notifications

@@ -7,8 +7,8 @@ import { SuggestedPrompts } from './SuggestedPrompts'
 import { useChatConversation } from './useChatConversation'
 import classes from './Chat.module.css'
 
-export function ChatWindow() {
-  const { history, send, isTyping, hasStarted } = useChatConversation()
+export function ChatWindow({ initialQuestion }: { initialQuestion?: string }) {
+  const { history, send, isTyping, hasStarted } = useChatConversation(initialQuestion)
   const viewportRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

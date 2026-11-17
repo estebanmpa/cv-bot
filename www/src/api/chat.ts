@@ -1,11 +1,11 @@
-const API_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
+import { API_BASE_URL } from './apiBaseUrl'
 
 export interface ChatReply {
   replies: string[]
 }
 
 export async function sendChatMessage(message: string, chatId: string): Promise<ChatReply> {
-  const response = await fetch(`${API_URL}/chat`, {
+  const response = await fetch(`${API_BASE_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message, chatId }),
