@@ -1,11 +1,14 @@
 import { Link } from '@tanstack/react-router'
 import { Badge, Button, Container, Group, Stack, Text, Title } from '@mantine/core'
 import { IconBriefcase, IconMessageChatbot, IconSend } from '@tabler/icons-react'
+import { Trans, useTranslation } from 'react-i18next'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { SocialLinks } from '../../components/SocialLinks'
 import classes from './LandingPage.module.css'
 
 export function LandingPage() {
+  const { t } = useTranslation()
+
   return (
     <section className={classes.hero}>
       <DotGrid />
@@ -20,17 +23,18 @@ export function LandingPage() {
             leftSection={<span className={classes.availableDot} />}
             className={classes.reveal}
           >
-            Open to freelance &amp; part-time
+            {t('landing.availability')}
           </Badge>
 
           <Title order={1} className={`${classes.title} ${classes.reveal}`}>
-            From idea to <span className={classes.gradientText}>production</span>, end to end
+            <Trans
+              i18nKey="landing.title"
+              components={{ highlight: <span className={classes.gradientText} /> }}
+            />
           </Title>
 
           <Text size="xl" c="dimmed" maw={680} className={classes.reveal}>
-            I'm Esteban Piga Alessi, a fullstack developer with 20 years in tech and a strong
-            backend focus. I build MVPs, APIs, integrations and AI features, and keep them
-            running.
+            {t('landing.intro')}
           </Text>
 
           <Group justify="center" gap="md" className={classes.reveal}>
@@ -44,7 +48,7 @@ export function LandingPage() {
               leftSection={<IconSend size={20} />}
               className={classes.cta}
             >
-              Start a project
+              {t('landing.startProject')}
             </Button>
             <Button
               component={Link}
@@ -55,7 +59,7 @@ export function LandingPage() {
               leftSection={<IconBriefcase size={20} />}
               className={classes.cta}
             >
-              See my services
+              {t('landing.seeServices')}
             </Button>
             <Button
               component={Link}
@@ -66,7 +70,7 @@ export function LandingPage() {
               leftSection={<IconMessageChatbot size={20} />}
               className={classes.cta}
             >
-              Chat with my profile
+              {t('landing.chatWithProfile')}
             </Button>
           </Group>
 

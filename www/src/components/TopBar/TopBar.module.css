@@ -25,6 +25,10 @@
 
 .brandText {
   letter-spacing: -0.02em;
+
+  @media (max-width: $mantine-breakpoint-xs) {
+    font-size: var(--mantine-font-size-md);
+  }
 }
 
 .brandAccent {
@@ -66,7 +70,7 @@
 
 @media (max-width: $mantine-breakpoint-xs) {
   .link {
-    padding: 6px;
+    padding: 6px 4px;
   }
 
   .link[data-hide-on-mobile='true'] {

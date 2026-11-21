@@ -1,11 +1,13 @@
 import { Link } from '@tanstack/react-router'
 import { Button, Group, List, Text, ThemeIcon, Title } from '@mantine/core'
 import { IconCheck, IconMessageChatbot, IconRosette } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import { ServiceOffering } from '../../api/serviceOfferings'
 import { serviceIconFor } from './serviceIcon'
 import classes from './ServiceCard.module.css'
 
 export function ServiceCard({ offering }: { offering: ServiceOffering }) {
+  const { t } = useTranslation()
   const Icon = serviceIconFor(offering.slug)
 
   return (
@@ -55,7 +57,7 @@ export function ServiceCard({ offering }: { offering: ServiceOffering }) {
         leftSection={<IconMessageChatbot size={18} />}
         className={classes.action}
       >
-        Ask the bot about it
+        {t('common.askBot')}
       </Button>
     </article>
   )

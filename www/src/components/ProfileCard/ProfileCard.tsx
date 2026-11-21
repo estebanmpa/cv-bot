@@ -1,10 +1,13 @@
 import { Avatar, Badge, Box, Button, Divider, Text, Title } from '@mantine/core'
 import { IconBrandTelegram, IconMapPin } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import { SocialLinks } from '../SocialLinks'
 import { TELEGRAM_URL, TelegramQr } from '../TelegramQr'
 import classes from './ProfileCard.module.css'
 
 export function ProfileCard() {
+  const { t } = useTranslation()
+
   return (
     <aside className={classes.card}>
       <div className={classes.avatarRing}>
@@ -18,12 +21,12 @@ export function ProfileCard() {
           Esteban Mariano Piga Alessi
         </Title>
         <Text size="sm" c="dimmed" mt={4}>
-          Systems Analyst &amp; Fullstack Developer
+          {t('profile.role')}
         </Text>
       </div>
 
       <Badge variant="light" radius="xl" leftSection={<IconMapPin size={12} />}>
-        Bariloche, Argentina
+        {t('profile.location')}
       </Badge>
 
       <SocialLinks />
@@ -45,7 +48,7 @@ export function ProfileCard() {
         radius="xl"
         leftSection={<IconBrandTelegram size={18} />}
       >
-        Continue on Telegram
+        {t('profile.continueOnTelegram')}
       </Button>
     </aside>
   )

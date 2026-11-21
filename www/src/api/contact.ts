@@ -1,7 +1,17 @@
 import { API_BASE_URL } from './apiBaseUrl'
 import type { ContactRequest } from '../components/ContactForm/contactSchema'
 
-const FALLBACK_ERROR = "Your message couldn't be sent. Please try again in a moment."
+/** Carries the HTTP status so the UI can explain the failure in the visitor's language. */
+export class ContactRequestError extends Error {
+  constructor(readonly status: number) {
+    super(`The contact request failed (${status})`)
+  }
+
+  /** The backend got the request but couldn't forward it (e.g. Telegram is down). */
+  get isDeliveryFailure(): boolean {
+    return this.status === 503
+  }
+}
 
 export async function sendContactRequest(request: ContactRequest): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/contact`, {
@@ -11,18 +21,6 @@ export async function sendContactRequest(request: ContactRequest): Promise<void>
   })
 
   if (!response.ok) {
-    throw new Error(await readErrorMessage(response))
-  }
-}
-
-// The backend explains delivery failures (503); anything else gets a generic message.
-async function readErrorMessage(response: Response): Promise<string> {
-  if (response.status !== 503) return FALLBACK_ERROR
-
-  try {
-    const body = await response.json()
-    return typeof body.message === 'string' ? body.message : FALLBACK_ERROR
-  } catch {
-    return FALLBACK_ERROR
+    throw new ContactRequestError(response.status)
   }
 }

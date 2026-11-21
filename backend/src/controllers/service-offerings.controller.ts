@@ -1,10 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
-import { SERVICE_OFFERINGS, ServiceOffering } from '../config/service-offerings';
+import { Controller, Get, Query } from '@nestjs/common';
+import { pickLanguage } from '../config/language';
+import {
+    PublicServiceOffering,
+    SERVICE_OFFERINGS,
+    toPublicServiceOffering,
+} from '../config/service-offerings';
 
 @Controller('services')
 export class ServiceOfferingsController {
     @Get()
-    findAll(): ServiceOffering[] {
-        return SERVICE_OFFERINGS;
+    findAll(@Query('lang') lang?: string): PublicServiceOffering[] {
+        const language = pickLanguage(lang);
+        return SERVICE_OFFERINGS.map((offering) => toPublicServiceOffering(offering, language));
     }
 }

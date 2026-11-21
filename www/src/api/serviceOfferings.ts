@@ -1,4 +1,5 @@
 import { API_BASE_URL } from './apiBaseUrl'
+import type { LanguageCode } from '../i18n'
 
 export interface ServiceOffering {
   slug: string
@@ -9,8 +10,8 @@ export interface ServiceOffering {
   suggestedQuestion: string
 }
 
-export async function fetchServiceOfferings(): Promise<ServiceOffering[]> {
-  const response = await fetch(`${API_BASE_URL}/services`)
+export async function fetchServiceOfferings(language: LanguageCode): Promise<ServiceOffering[]> {
+  const response = await fetch(`${API_BASE_URL}/services?lang=${language}`)
 
   if (!response.ok) {
     throw new Error(`Could not load the services (${response.status})`)

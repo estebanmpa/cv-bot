@@ -1,5 +1,6 @@
 import { Alert, Container, SimpleGrid, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { IconAlertTriangle } from '@tabler/icons-react'
+import { Trans, useTranslation } from 'react-i18next'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard'
 import { useProjects } from '../../queries/useProjects'
@@ -8,6 +9,8 @@ import classes from '../../styles/page.module.css'
 const SKELETON_CARDS = 2
 
 export function ProjectsPage() {
+  const { t } = useTranslation()
+
   return (
     <section className={classes.page}>
       <DotGrid />
@@ -15,11 +18,13 @@ export function ProjectsPage() {
       <Container size="lg" className={classes.content}>
         <Stack gap="xs" mb="xl">
           <Title order={1} className={classes.title}>
-            Projects I'm <span className={classes.gradientText}>building</span>
+            <Trans
+              i18nKey="projects.title"
+              components={{ highlight: <span className={classes.gradientText} /> }}
+            />
           </Title>
           <Text size="lg" c="dimmed" maw={620}>
-            Side projects I design, build and run end to end, from the architecture to the
-            deploy.
+            {t('projects.intro')}
           </Text>
         </Stack>
 
@@ -30,12 +35,13 @@ export function ProjectsPage() {
 }
 
 function ProjectList() {
+  const { t } = useTranslation()
   const { data: projects, isPending, isError } = useProjects()
 
   if (isError) {
     return (
       <Alert color="red" radius="lg" icon={<IconAlertTriangle size={18} />}>
-        The projects couldn't be loaded. Please try again in a moment.
+        {t('projects.loadError')}
       </Alert>
     )
   }

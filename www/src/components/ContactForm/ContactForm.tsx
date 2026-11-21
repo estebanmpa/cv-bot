@@ -2,11 +2,13 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Alert, Button, Select, Stack, Text, TextInput, Textarea } from '@mantine/core'
 import { IconAlertTriangle, IconCircleCheck, IconSend } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
+import { ContactRequestError } from '../../api/contact'
 import { useSendContactRequest } from '../../mutations/useSendContactRequest'
 import {
   ContactRequest,
   MESSAGE_MAX_LENGTH,
-  PROJECT_TYPE_OPTIONS,
+  PROJECT_TYPES,
   contactSchema,
 } from './contactSchema'
 import classes from './ContactForm.module.css'
@@ -20,12 +22,17 @@ const EMPTY_REQUEST: ContactRequest = {
 }
 
 export function ContactForm() {
+  const { t } = useTranslation()
   const sendContactRequest = useSendContactRequest()
   const { register, control, handleSubmit, reset, watch, formState } = useForm<ContactRequest>({
     resolver: zodResolver(contactSchema),
     defaultValues: EMPTY_REQUEST,
   })
   const { errors } = formState
+  const projectTypeOptions = PROJECT_TYPES.map((value) => ({
+    value,
+    label: t(`contact.projectTypes.${value}`),
+  }))
 
   const onSubmit = handleSubmit((request) =>
     sendContactRequest.mutate(request, { onSuccess: () => reset(EMPTY_REQUEST) }),
@@ -36,25 +43,27 @@ export function ContactForm() {
       <Stack gap="md">
         {sendContactRequest.isSuccess && (
           <Alert color="teal" radius="lg" icon={<IconCircleCheck size={18} />}>
-            Thanks! Your message reached me. I usually reply within one business day.
+            {t('contact.form.success')}
           </Alert>
         )}
         {sendContactRequest.isError && (
           <Alert color="red" radius="lg" icon={<IconAlertTriangle size={18} />}>
-            {sendContactRequest.error.message}
+            {isDeliveryFailure(sendContactRequest.error)
+              ? t('contact.form.unavailable')
+              : t('contact.form.failed')}
           </Alert>
         )}
 
         <TextInput
-          label="Name"
-          placeholder="Your name"
+          label={t('contact.form.name')}
+          placeholder={t('contact.form.namePlaceholder')}
           autoComplete="name"
           error={errors.name?.message}
           {...register('name')}
         />
         <TextInput
-          label="Email"
-          placeholder="you@company.com"
+          label={t('contact.form.email')}
+          placeholder={t('contact.form.emailPlaceholder')}
           type="email"
           autoComplete="email"
           error={errors.email?.message}
@@ -65,9 +74,9 @@ export function ContactForm() {
           control={control}
           render={({ field }) => (
             <Select
-              label="What do you need?"
-              placeholder="Pick one"
-              data={PROJECT_TYPE_OPTIONS}
+              label={t('contact.form.projectType')}
+              placeholder={t('contact.form.projectTypePlaceholder')}
+              data={projectTypeOptions}
               value={field.value ?? null}
               onChange={field.onChange}
               onBlur={field.onBlur}
@@ -77,8 +86,8 @@ export function ContactForm() {
           )}
         />
         <Textarea
-          label="Tell me about it"
-          placeholder="What you want to build or fix, where it stands today and any deadline."
+          label={t('contact.form.message')}
+          placeholder={t('contact.form.messagePlaceholder')}
           autosize
           minRows={5}
           maxRows={10}
@@ -107,12 +116,16 @@ export function ContactForm() {
           loading={sendContactRequest.isPending}
           className={classes.submit}
         >
-          Send message
+          {t('contact.form.send')}
         </Button>
         <Text size="xs" c="dimmed" ta="center">
-          Every project is quoted after a short call about its scope.
+          {t('contact.form.quoteNote')}
         </Text>
       </Stack>
     </form>
   )
+}
+
+function isDeliveryFailure(error: Error): boolean {
+  return error instanceof ContactRequestError && error.isDeliveryFailure
 }

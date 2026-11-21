@@ -10,6 +10,7 @@ import {
   Title,
 } from '@mantine/core'
 import { IconAlertTriangle, IconSend } from '@tabler/icons-react'
+import { Trans, useTranslation } from 'react-i18next'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { ServiceCard } from '../../components/ServiceCard/ServiceCard'
 import { useServiceOfferings } from '../../queries/useServiceOfferings'
@@ -18,14 +19,11 @@ import classes from './ServicesPage.module.css'
 
 const SKELETON_CARDS = 3
 
-const WORK_STEPS = [
-  { title: 'Discovery call', text: 'A short call to understand the problem and the goal.' },
-  { title: 'Proposal', text: 'Scope, milestones and a quote, so you know what to expect.' },
-  { title: 'Build', text: 'Short iterations with demos you can try, not status reports.' },
-  { title: 'Launch & support', text: 'Deploy, handover docs, and help once it is live.' },
-] as const
+const WORK_STEPS = ['discovery', 'proposal', 'build', 'launch'] as const
 
 export function ServicesPage() {
+  const { t } = useTranslation()
+
   return (
     <section className={pageClasses.page}>
       <DotGrid />
@@ -33,11 +31,13 @@ export function ServicesPage() {
       <Container size="lg" className={pageClasses.content}>
         <Stack gap="xs" mb="xl">
           <Title order={1} className={pageClasses.title}>
-            How I can <span className={pageClasses.gradientText}>help</span>
+            <Trans
+              i18nKey="services.title"
+              components={{ highlight: <span className={pageClasses.gradientText} /> }}
+            />
           </Title>
           <Text size="lg" c="dimmed" maw={640}>
-            Freelance projects and part-time roles, for teams anywhere. I take ownership from
-            the first conversation to production.
+            {t('services.intro')}
           </Text>
         </Stack>
 
@@ -50,12 +50,13 @@ export function ServicesPage() {
 }
 
 function ServiceList() {
+  const { t } = useTranslation()
   const { data: offerings, isPending, isError } = useServiceOfferings()
 
   if (isError) {
     return (
       <Alert color="red" radius="lg" icon={<IconAlertTriangle size={18} />}>
-        The services couldn't be loaded. Please try again in a moment.
+        {t('services.loadError')}
       </Alert>
     )
   }
@@ -72,20 +73,22 @@ function ServiceList() {
 }
 
 function WorkProcess() {
+  const { t } = useTranslation()
+
   return (
     <Stack gap="lg" mt={64}>
       <Title order={2} className={classes.sectionTitle}>
-        How I work
+        {t('services.howIWork')}
       </Title>
       <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing="lg">
         {WORK_STEPS.map((step, index) => (
-          <div key={step.title} className={classes.step}>
+          <div key={step} className={classes.step}>
             <span className={classes.stepNumber}>{index + 1}</span>
             <Text fw={700} mt="sm">
-              {step.title}
+              {t(`services.steps.${step}.title`)}
             </Text>
             <Text size="sm" c="dimmed" mt={4}>
-              {step.text}
+              {t(`services.steps.${step}.text`)}
             </Text>
           </div>
         ))}
@@ -95,14 +98,16 @@ function WorkProcess() {
 }
 
 function ContactCallout() {
+  const { t } = useTranslation()
+
   return (
     <div className={classes.callout}>
       <div>
         <Title order={2} className={classes.sectionTitle}>
-          Have a project in mind?
+          {t('services.callout.title')}
         </Title>
         <Text c="dimmed" mt={4}>
-          Tell me what you need and I'll get back to you with next steps.
+          {t('services.callout.text')}
         </Text>
       </div>
       <Button
@@ -114,7 +119,7 @@ function ContactCallout() {
         gradient={{ from: 'violet', to: 'cyan', deg: 90 }}
         leftSection={<IconSend size={18} />}
       >
-        Start a project
+        {t('landing.startProject')}
       </Button>
     </div>
   )

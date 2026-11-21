@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSendChatMessage } from '../../mutations/useSendChatMessage'
-import { BOT_ERROR_TEXT, ChatEntry, WELCOME_TEXT, createChatEntry } from './chatEntry'
+import { ChatEntry, createChatEntry } from './chatEntry'
 
-const welcomeEntry: ChatEntry = { id: 'welcome', role: 'bot', text: WELCOME_TEXT }
-
+// The welcome message isn't part of the history: ChatWindow renders it in the current language.
 export function useChatConversation(initialQuestion?: string) {
-  const [history, setHistory] = useState<ChatEntry[]>([welcomeEntry])
+  const { t } = useTranslation()
+  const [history, setHistory] = useState<ChatEntry[]>([])
   const [chatId] = useState(() => crypto.randomUUID())
   const sendMessage = useSendChatMessage()
 
@@ -21,7 +22,7 @@ export function useChatConversation(initialQuestion?: string) {
       {
         onSuccess: ({ replies }) =>
           appendEntries(replies.map((reply) => createChatEntry('bot', reply))),
-        onError: () => appendEntries([createChatEntry('bot', BOT_ERROR_TEXT)]),
+        onError: () => appendEntries([createChatEntry('bot', t('chat.error'))]),
       },
     )
   }
@@ -40,6 +41,6 @@ export function useChatConversation(initialQuestion?: string) {
     history,
     send,
     isTyping: sendMessage.isPending,
-    hasStarted: history.length > 1,
+    hasStarted: history.length > 0,
   }
 }
