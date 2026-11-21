@@ -19,16 +19,11 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  font-size: clamp(2.25rem, 6vw, 4rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 800;
-
-  /* Keep the greeting on one line; the size cap keeps it inside the md container */
-  @media (min-width: $mantine-breakpoint-sm) {
-    white-space: nowrap;
-    font-size: min(5.5vw, 3.75rem);
-  }
+  text-wrap: balance;
 }
 
 .gradientText {
@@ -69,11 +64,25 @@
   &:nth-child(4) {
     animation-delay: 300ms;
   }
+
+  &:nth-child(5) {
+    animation-delay: 400ms;
+  }
+}
+
+.availableDot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-teal-5);
+  animation: pulse 2s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .gradientText {
+  .gradientText,
+  .availableDot {
     animation: none;
     opacity: 1;
   }
@@ -94,5 +103,16 @@
 @keyframes shimmer {
   to {
     background-position: 200% center;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(18, 184, 134, 0.6);
+  }
+
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px rgba(18, 184, 134, 0);
   }
 }

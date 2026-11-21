@@ -1,0 +1,32 @@
+.sectionTitle {
+  letter-spacing: -0.02em;
+}
+
+.step {
+  composes: glass from '../../styles/glass.module.css';
+  padding: var(--mantine-spacing-lg);
+}
+
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 800;
+  color: var(--mantine-color-white);
+  background: linear-gradient(135deg, var(--mantine-color-violet-5), var(--mantine-color-cyan-5));
+}
+
+.callout {
+  composes: glass from '../../styles/glass.module.css';
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-lg);
+  margin-top: 64px;
+  padding: var(--mantine-spacing-xl);
+  border-color: light-dark(rgba(121, 53, 250, 0.25), rgba(121, 53, 250, 0.4));
+}

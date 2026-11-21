@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicChatRouteImport } from './routes/_public/chat'
+import { Route as PublicContactRouteImport } from './routes/_public/contact'
 import { Route as PublicProjectsRouteImport } from './routes/_public/projects'
+import { Route as PublicServicesRouteImport } from './routes/_public/services'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -28,39 +30,57 @@ const PublicChatRoute = PublicChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicContactRoute = PublicContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => PublicRoute,
+} as any)
 const PublicProjectsRoute = PublicProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicServicesRoute = PublicServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => PublicRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/chat': typeof PublicChatRoute
+  '/contact': typeof PublicContactRoute
   '/projects': typeof PublicProjectsRoute
+  '/services': typeof PublicServicesRoute
 }
 export interface FileRoutesByTo {
   '/chat': typeof PublicChatRoute
+  '/contact': typeof PublicContactRoute
   '/projects': typeof PublicProjectsRoute
+  '/services': typeof PublicServicesRoute
   '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
   '/_public/chat': typeof PublicChatRoute
+  '/_public/contact': typeof PublicContactRoute
   '/_public/projects': typeof PublicProjectsRoute
+  '/_public/services': typeof PublicServicesRoute
   '/_public/': typeof PublicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/projects'
+  fullPaths: '/' | '/chat' | '/contact' | '/projects' | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/chat' | '/projects' | '/'
+  to: '/chat' | '/contact' | '/projects' | '/services' | '/'
   id:
     | '__root__'
     | '/_public'
     | '/_public/chat'
+    | '/_public/contact'
     | '/_public/projects'
+    | '/_public/services'
     | '/_public/'
   fileRoutesById: FileRoutesById
 }
@@ -91,6 +111,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicChatRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/contact': {
+      id: '/_public/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof PublicContactRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/projects': {
       id: '/_public/projects'
       path: '/projects'
@@ -98,18 +125,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicProjectsRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/services': {
+      id: '/_public/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof PublicServicesRouteImport
+      parentRoute: typeof PublicRoute
+    }
   }
 }
 
 interface PublicRouteChildren {
   PublicChatRoute: typeof PublicChatRoute
+  PublicContactRoute: typeof PublicContactRoute
   PublicProjectsRoute: typeof PublicProjectsRoute
+  PublicServicesRoute: typeof PublicServicesRoute
   PublicIndexRoute: typeof PublicIndexRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicChatRoute: PublicChatRoute,
+  PublicContactRoute: PublicContactRoute,
   PublicProjectsRoute: PublicProjectsRoute,
+  PublicServicesRoute: PublicServicesRoute,
   PublicIndexRoute: PublicIndexRoute,
 }
 

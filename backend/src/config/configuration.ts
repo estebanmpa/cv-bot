@@ -18,5 +18,6 @@ export default () => ({
     },
     telegram: {
         botToken: process.env.TELEGRAM_BOT_TOKEN,
+        ownerChatId: process.env.TELEGRAM_OWNER_CHAT_ID,
     },
 });

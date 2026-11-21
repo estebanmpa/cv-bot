@@ -3,7 +3,7 @@ import { IconAlertTriangle } from '@tabler/icons-react'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard'
 import { useProjects } from '../../queries/useProjects'
-import classes from './ProjectsPage.module.css'
+import classes from '../../styles/page.module.css'
 
 const SKELETON_CARDS = 2
 
