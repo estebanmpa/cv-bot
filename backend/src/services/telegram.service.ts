@@ -12,14 +12,17 @@ export class TelegramService {
     this.apiUrl = `https://api.telegram.org/bot${token}/sendMessage`;
   }
 
-  async sendMessage(chatId: number | string, text: string): Promise<void> {
+  // Resolves to whether Telegram accepted the message, so callers can react.
+  async sendMessage(chatId: number | string, text: string): Promise<boolean> {
     try {
       await axios.post(this.apiUrl, {
         chat_id: chatId,
         text,
       });
+      return true;
     } catch (error) {
       this.logger.error('Error sending message to Telegram', error);
+      return false;
     }
   }
 }

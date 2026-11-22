@@ -1,0 +1,126 @@
+{
+  "common": {
+    "language": "Idioma",
+    "toggleColorScheme": "Cambiar tema claro u oscuro",
+    "askBot": "Preguntale al bot"
+  },
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "projects": "Proyectos",
+    "chat": "Chat",
+    "contact": "Contacto"
+  },
+  "landing": {
+    "availability": "Disponible para proyectos",
+    "title": "De la idea a <highlight>producción</highlight>, de punta a punta",
+    "intro": "Soy Esteban Piga Alessi, desarrollador fullstack con 20 años en tecnología y foco en el backend. Construyo MVPs, APIs, integraciones y funciones con IA, y las mantengo funcionando.",
+    "startProject": "Empezar un proyecto",
+    "seeServices": "Ver mis servicios",
+    "chatWithProfile": "Chateá con mi perfil"
+  },
+  "services": {
+    "title": "Cómo te puedo <highlight>ayudar</highlight>",
+    "intro": "Proyectos freelance y roles part-time, para equipos de cualquier lugar. Me hago cargo desde la primera charla hasta producción.",
+    "loadError": "No se pudieron cargar los servicios. Probá de nuevo en un momento.",
+    "howIWork": "Cómo trabajo",
+    "steps": {
+      "discovery": {
+        "title": "Llamada inicial",
+        "text": "Una charla corta para entender el problema y el objetivo."
+      },
+      "proposal": {
+        "title": "Propuesta",
+        "text": "Alcance, etapas y presupuesto, para que sepas qué esperar."
+      },
+      "build": {
+        "title": "Desarrollo",
+        "text": "Iteraciones cortas con demos que podés probar, no reportes de avance."
+      },
+      "launch": {
+        "title": "Lanzamiento y soporte",
+        "text": "Deploy, documentación de traspaso y ayuda una vez en producción."
+      }
+    },
+    "callout": {
+      "title": "¿Tenés un proyecto en mente?",
+      "text": "Contame qué necesitás y te respondo con los próximos pasos."
+    }
+  },
+  "projects": {
+    "title": "Proyectos que estoy <highlight>construyendo</highlight>",
+    "intro": "Proyectos propios que diseño, construyo y opero de punta a punta, desde la arquitectura hasta el deploy.",
+    "loadError": "No se pudieron cargar los proyectos. Probá de nuevo en un momento.",
+    "visitSite": "Visitar sitio",
+    "status": {
+      "live": "En producción",
+      "inDevelopment": "En desarrollo"
+    }
+  },
+  "contact": {
+    "title": "Construyamos <highlight>algo</highlight>",
+    "intro": "Contame sobre tu proyecto o el rol que buscás. Leo cada mensaje personalmente y respondo con los próximos pasos, normalmente en un día hábil.",
+    "timezone": "Bariloche, Argentina (UTC−3), trabajo con equipos en cualquier zona horaria",
+    "knowMore": "¿Querés saber más antes?",
+    "askProfileBot": "Preguntale a mi bot",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "vos@empresa.com",
+      "projectType": "¿Qué necesitás?",
+      "projectTypePlaceholder": "Elegí una opción",
+      "message": "Contame más",
+      "messagePlaceholder": "Qué querés construir o arreglar, en qué estado está hoy y si hay alguna fecha límite.",
+      "send": "Enviar mensaje",
+      "quoteNote": "Cada proyecto se presupuesta después de una charla corta sobre su alcance.",
+      "success": "¡Gracias! Tu mensaje me llegó. Suelo responder en un día hábil.",
+      "unavailable": "Tu mensaje no se pudo entregar en este momento. Probá de nuevo o escribime por email.",
+      "failed": "No se pudo enviar tu mensaje. Probá de nuevo en un momento."
+    },
+    "projectTypes": {
+      "new-product": "Un producto nuevo o MVP",
+      "existing-product": "Trabajo sobre un producto existente",
+      "ai-integration": "Integración de IA",
+      "legacy-system": "Sistema legacy o base de datos",
+      "part-time-role": "Rol part-time o por contrato",
+      "other": "Otra cosa"
+    },
+    "validation": {
+      "nameRequired": "Decime tu nombre",
+      "nameMax": "Usá menos de {{max}} caracteres",
+      "emailInvalid": "Ingresá un email válido para poder responderte",
+      "projectTypeRequired": "Elegí la opción que mejor encaje",
+      "messageMin": "Agregá algunos detalles más (al menos {{min}} caracteres)",
+      "messageMax": "Usá menos de {{max}} caracteres"
+    }
+  },
+  "chat": {
+    "windowLabel": "Chat con el asistente de Esteban",
+    "welcome": "Hola 👋 Soy el asistente virtual de Esteban. Preguntame por sus servicios, experiencia o disponibilidad.",
+    "error": "No pude comunicarme con el bot. Probá de nuevo en un momento.",
+    "title": "Asistente de IA de Esteban",
+    "subtitle": "En línea · Preguntá por servicios, experiencia o disponibilidad",
+    "suggestions": {
+      "services": "¿Qué servicios ofrecés?",
+      "mvp": "¿Podés construir un MVP para mi idea?",
+      "experience": "Contame sobre tu experiencia"
+    },
+    "placeholder": "Preguntame lo que quieras…",
+    "messageLabel": "Mensaje",
+    "send": "Enviar mensaje",
+    "openLink": "Abrir link",
+    "typing": "El asistente está escribiendo",
+    "validation": {
+      "empty": "Escribí un mensaje antes de enviar",
+      "max": "El mensaje no puede superar los {{max}} caracteres"
+    }
+  },
+  "profile": {
+    "role": "Analista de Sistemas y Desarrollador Fullstack",
+    "location": "Bariloche, Argentina",
+    "continueOnTelegram": "Seguir en Telegram",
+    "preferTelegram": "¿Preferís Telegram?",
+    "scanTelegram": "Escaneá o abrí el chat en Telegram"
+  }
+}

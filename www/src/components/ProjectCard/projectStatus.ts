@@ -1,13 +1,13 @@
 import { ProjectStatus } from '../../api/projects'
 
 interface StatusBadge {
-  label: string
+  labelKey: 'projects.status.live' | 'projects.status.inDevelopment'
   color: string
 }
 
 const STATUS_BADGES: Record<ProjectStatus, StatusBadge> = {
-  live: { label: 'Live', color: 'teal' },
-  'in-development': { label: 'In development', color: 'yellow' },
+  live: { labelKey: 'projects.status.live', color: 'teal' },
+  'in-development': { labelKey: 'projects.status.inDevelopment', color: 'yellow' },
 }
 
 export function statusBadgeFor(status: ProjectStatus): StatusBadge {

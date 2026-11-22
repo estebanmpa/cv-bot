@@ -1,14 +1,14 @@
-import { PROJECTS, Project, formatProjectsForContext } from './projects';
+import { PROJECTS, Project, formatProjectsForContext, toPublicProject } from './projects';
 
 const project: Project = {
     slug: 'demo',
     name: 'Demo',
-    tagline: 'A demo project.',
+    tagline: { en: 'A demo project.', es: 'Un proyecto demo.' },
     status: 'in-development',
-    highlights: ['First highlight'],
+    highlights: { en: ['First highlight'], es: ['Primer punto'] },
     stack: ['NestJS', 'Redis'],
     details: '\n  Longer detail for the bot.  ',
-    suggestedQuestion: 'What is Demo?',
+    suggestedQuestion: { en: 'What is Demo?', es: '¿Qué es Demo?' },
 };
 
 describe('formatProjectsForContext', () => {
@@ -28,6 +28,21 @@ describe('formatProjectsForContext', () => {
     it('labels live projects as in production', () => {
         const text = formatProjectsForContext([{ ...project, status: 'live' }]);
         expect(text).toContain('(In production)');
+    });
+});
+
+describe('toPublicProject', () => {
+    it('picks the texts of the language and drops the details', () => {
+        expect(toPublicProject(project, 'es')).toEqual({
+            slug: 'demo',
+            name: 'Demo',
+            tagline: 'Un proyecto demo.',
+            status: 'in-development',
+            url: undefined,
+            highlights: ['Primer punto'],
+            stack: ['NestJS', 'Redis'],
+            suggestedQuestion: '¿Qué es Demo?',
+        });
     });
 });
 

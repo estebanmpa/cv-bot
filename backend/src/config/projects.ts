@@ -1,6 +1,22 @@
+import { Language, Localized } from './language';
+
 export type ProjectStatus = 'live' | 'in-development';
 
 export interface Project {
+    slug: string;
+    name: string;
+    tagline: Localized;
+    status: ProjectStatus;
+    url?: string;
+    highlights: Localized<string[]>;
+    stack: string[];
+    // Extra detail only the bot uses, to answer follow-up questions. The bot reads
+    // English and answers in the visitor's language, so it isn't translated.
+    details: string;
+    suggestedQuestion: Localized;
+}
+
+export interface PublicProject {
     slug: string;
     name: string;
     tagline: string;
@@ -8,8 +24,6 @@ export interface Project {
     url?: string;
     highlights: string[];
     stack: string[];
-    // Extra detail only the bot uses, to answer follow-up questions.
-    details: string;
     suggestedQuestion: string;
 }
 
@@ -18,13 +32,23 @@ export const PROJECTS: Project[] = [
     {
         slug: 'iam',
         name: 'IAM',
-        tagline: 'OAuth 2.0 identity provider that handles sign-in for all my apps.',
+        tagline: {
+            en: 'OAuth 2.0 identity provider that handles sign-in for all my apps.',
+            es: 'Proveedor de identidad OAuth 2.0 que maneja el inicio de sesión de todas mis apps.',
+        },
         status: 'live',
-        highlights: [
-            'Authorization Code flow with discovery, token exchange and user info',
-            'Multi-tenant apps with contextual role-based access control',
-            'Google sign-in, service accounts and machine-to-machine tokens',
-        ],
+        highlights: {
+            en: [
+                'Authorization Code flow with discovery, token exchange and user info',
+                'Multi-tenant apps with contextual role-based access control',
+                'Google sign-in, service accounts and machine-to-machine tokens',
+            ],
+            es: [
+                'Flujo Authorization Code con discovery, intercambio de tokens y user info',
+                'Apps multi-tenant con control de acceso por roles según el contexto',
+                'Login con Google, cuentas de servicio y tokens entre servidores',
+            ],
+        },
         stack: ['NestJS', 'React', 'PostgreSQL', 'Redis', 'Docker', 'Nginx'],
         details: `
 Started in 2023 and in production (v1.x). A centralized authentication service
@@ -37,19 +61,32 @@ service accounts that can impersonate users for server-to-server calls. Includes
 an admin dashboard (React + Mantine). Hexagonal architecture, Argon2 password
 hashing, JWT in secure cookies, Nginx as reverse proxy with SSL termination and
 rate limiting, deployed with Docker Compose and GitHub Actions.`,
-        suggestedQuestion: 'How does the IAM handle sign-in for your other apps?',
+        suggestedQuestion: {
+            en: 'How does the IAM handle sign-in for your other apps?',
+            es: '¿Cómo maneja el IAM el inicio de sesión de tus otras apps?',
+        },
     },
     {
         slug: 'presupuestia',
         name: 'Presupuestia',
-        tagline: 'Quoting and payments app for tradespeople and service providers.',
+        tagline: {
+            en: 'Quoting and payments app for tradespeople and service providers.',
+            es: 'App de presupuestos y cobros para oficios y prestadores de servicios.',
+        },
         status: 'live',
         url: 'https://presupuestia.com',
-        highlights: [
-            'Budgets priced item by item from a catalog of materials and labor',
-            'AI-drafted budgets from a free-text job description',
-            'Clients approve on a public page and pay deposits via Mercado Pago',
-        ],
+        highlights: {
+            en: [
+                'Budgets priced item by item from a catalog of materials and labor',
+                'AI-drafted budgets from a free-text job description',
+                'Clients approve on a public page and pay deposits via Mercado Pago',
+            ],
+            es: [
+                'Presupuestos cotizados ítem por ítem desde un catálogo de materiales y mano de obra',
+                'Presupuestos redactados con IA a partir de la descripción del trabajo',
+                'El cliente aprueba en una página pública y paga la seña con Mercado Pago',
+            ],
+        },
         stack: ['NestJS', 'React', 'PostgreSQL', 'Redis', 'BullMQ', 'Claude API', 'Mercado Pago'],
         details: `
 Started in 2026 and in production. Spanish-language SaaS aimed at the Argentine
@@ -65,7 +102,10 @@ catalog. Free and Pro plans billed as Mercado Pago subscriptions. Background job
 (budget expiration, payment notifications, subscription reconciliation, token
 refresh) run on BullMQ queues over Redis. Sign-in goes through his own IAM.
 Hexagonal architecture with use cases, TypeORM migrations, PDF export.`,
-        suggestedQuestion: 'What is Presupuestia and how does its AI budget drafting work?',
+        suggestedQuestion: {
+            en: 'What is Presupuestia and how does its AI budget drafting work?',
+            es: '¿Qué es Presupuestia y cómo arma presupuestos con IA?',
+        },
     },
 ];
 
@@ -77,11 +117,24 @@ function formatProject(project: Project): string {
     const status = project.status === 'live' ? 'In production' : 'In active development';
 
     return [
-        `**${project.name}** (${status}) — ${project.tagline}`,
+        `**${project.name}** (${status}) — ${project.tagline.en}`,
         project.details.trim(),
         `Stack: ${project.stack.join(', ')}.`,
         project.url && `Website: ${project.url}`,
     ]
         .filter(Boolean)
         .join('\n');
+}
+
+export function toPublicProject(project: Project, language: Language): PublicProject {
+    return {
+        slug: project.slug,
+        name: project.name,
+        tagline: project.tagline[language],
+        status: project.status,
+        url: project.url,
+        highlights: project.highlights[language],
+        stack: project.stack,
+        suggestedQuestion: project.suggestedQuestion[language],
+    };
 }

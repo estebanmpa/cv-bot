@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ActionIcon, Text, Textarea } from '@mantine/core'
 import { IconArrowUp } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
+import i18n from '../../i18n'
 import classes from './Chat.module.css'
 
 const MAX_MESSAGE_LENGTH = 100
@@ -12,8 +14,10 @@ const chatSchema = z.object({
   message: z
     .string()
     .trim()
-    .min(1, 'Write a message before sending')
-    .max(MAX_MESSAGE_LENGTH, `Message can't exceed ${MAX_MESSAGE_LENGTH} characters`),
+    .min(1, { error: () => i18n.t('chat.validation.empty') })
+    .max(MAX_MESSAGE_LENGTH, {
+      error: () => i18n.t('chat.validation.max', { max: MAX_MESSAGE_LENGTH }),
+    }),
 })
 
 type ChatFormValues = z.infer<typeof chatSchema>
@@ -24,6 +28,7 @@ interface ChatComposerProps {
 }
 
 export function ChatComposer({ onSend, isBusy }: ChatComposerProps) {
+  const { t } = useTranslation()
   const { register, handleSubmit, reset, watch, formState } = useForm<ChatFormValues>({
     resolver: zodResolver(chatSchema),
     defaultValues: { message: '' },
@@ -49,8 +54,8 @@ export function ChatComposer({ onSend, isBusy }: ChatComposerProps) {
         <Textarea
           {...register('message')}
           variant="unstyled"
-          placeholder="Ask me anything…"
-          aria-label="Message"
+          placeholder={t('chat.placeholder')}
+          aria-label={t('chat.messageLabel')}
           autosize
           minRows={1}
           maxRows={4}
@@ -69,7 +74,7 @@ export function ChatComposer({ onSend, isBusy }: ChatComposerProps) {
           gradient={{ from: 'violet', to: 'cyan', deg: 135 }}
           loading={isBusy}
           disabled={messageLength === 0}
-          aria-label="Send message"
+          aria-label={t('chat.send')}
           className={classes.sendButton}
         >
           <IconArrowUp size={20} stroke={2.2} />

@@ -1,11 +1,14 @@
 import { Link } from '@tanstack/react-router'
 import { Badge, Button, Container, Group, Stack, Text, Title } from '@mantine/core'
-import { IconCode, IconMapPin, IconMessageChatbot } from '@tabler/icons-react'
+import { IconBriefcase, IconMessageChatbot, IconSend } from '@tabler/icons-react'
+import { Trans, useTranslation } from 'react-i18next'
 import { DotGrid } from '../../components/DotGrid/DotGrid'
 import { SocialLinks } from '../../components/SocialLinks'
 import classes from './LandingPage.module.css'
 
 export function LandingPage() {
+  const { t } = useTranslation()
+
   return (
     <section className={classes.hero}>
       <DotGrid />
@@ -14,48 +17,66 @@ export function LandingPage() {
         <Stack align="center" gap="lg">
           <Badge
             variant="light"
+            color="teal"
             size="lg"
             radius="xl"
-            leftSection={<IconMapPin size={14} />}
+            leftSection={<span className={classes.availableDot} />}
             className={classes.reveal}
           >
-            Bariloche, Argentina · 20 years in tech
+            {t('landing.availability')}
           </Badge>
 
           <Title order={1} className={`${classes.title} ${classes.reveal}`}>
-            Hi, I'm <span className={classes.gradientText}>Esteban Piga Alessi</span>
+            <Trans
+              i18nKey="landing.title"
+              components={{ highlight: <span className={classes.gradientText} /> }}
+            />
           </Title>
 
-          <Text size="xl" c="dimmed" maw={640} className={classes.reveal}>
-            Systems Analyst &amp; Fullstack Developer with a strong backend focus.
+          <Text size="xl" c="dimmed" maw={680} className={classes.reveal}>
+            {t('landing.intro')}
           </Text>
 
           <Group justify="center" gap="md" className={classes.reveal}>
             <Button
               component={Link}
-              to="/chat"
+              to="/contact"
               size="md"
               radius="xl"
               variant="gradient"
               gradient={{ from: 'violet', to: 'cyan', deg: 90 }}
-              leftSection={<IconMessageChatbot size={20} />}
+              leftSection={<IconSend size={20} />}
               className={classes.cta}
             >
-              Chat with my profile
+              {t('landing.startProject')}
             </Button>
             <Button
               component={Link}
-              to="/projects"
+              to="/services"
               size="md"
               radius="xl"
               variant="default"
-              leftSection={<IconCode size={20} />}
+              leftSection={<IconBriefcase size={20} />}
               className={classes.cta}
             >
-              See what I'm building
+              {t('landing.seeServices')}
             </Button>
-            <SocialLinks />
+            <Button
+              component={Link}
+              to="/chat"
+              size="md"
+              radius="xl"
+              variant="light"
+              leftSection={<IconMessageChatbot size={20} />}
+              className={classes.cta}
+            >
+              {t('landing.chatWithProfile')}
+            </Button>
           </Group>
+
+          <div className={classes.reveal}>
+            <SocialLinks />
+          </div>
         </Stack>
       </Container>
     </section>

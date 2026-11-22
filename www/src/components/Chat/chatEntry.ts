@@ -14,17 +14,6 @@ export type MessageBody =
 // should be rendered as a link (webchat renders HTML, unlike WhatsApp/Telegram).
 const LINK_TOKEN = '[[LINK]]'
 
-export const WELCOME_TEXT =
-  "Hi 👋 I'm Esteban's virtual assistant. Ask me about his experience, stack, or availability."
-
-export const BOT_ERROR_TEXT = "I couldn't reach the bot. Please try again in a moment."
-
-export const SUGGESTED_PROMPTS = [
-  "What's your tech stack?",
-  'Tell me about your experience',
-  'Are you open to new projects?',
-] as const
-
 export function createChatEntry(role: ChatRole, text: string): ChatEntry {
   return { id: crypto.randomUUID(), role, text }
 }

@@ -3,10 +3,10 @@ import { statusBadgeFor } from './projectStatus'
 
 describe('statusBadgeFor', () => {
   it('labels live projects', () => {
-    expect(statusBadgeFor('live')).toEqual({ label: 'Live', color: 'teal' })
+    expect(statusBadgeFor('live')).toEqual({ labelKey: 'projects.status.live', color: 'teal' })
   })
 
   it('labels projects still in development', () => {
-    expect(statusBadgeFor('in-development').label).toBe('In development')
+    expect(statusBadgeFor('in-development').labelKey).toBe('projects.status.inDevelopment')
   })
 })

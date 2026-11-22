@@ -1,11 +1,13 @@
 import { Link } from '@tanstack/react-router'
 import { Badge, Button, Group, List, Text, Title } from '@mantine/core'
 import { IconExternalLink, IconMessageChatbot } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import { Project } from '../../api/projects'
 import { statusBadgeFor } from './projectStatus'
 import classes from './ProjectCard.module.css'
 
 export function ProjectCard({ project }: { project: Project }) {
+  const { t } = useTranslation()
   const status = statusBadgeFor(project.status)
 
   return (
@@ -15,7 +17,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.name}
         </Title>
         <Badge variant="dot" color={status.color} radius="xl">
-          {status.label}
+          {t(status.labelKey)}
         </Badge>
       </Group>
 
@@ -47,7 +49,7 @@ export function ProjectCard({ project }: { project: Project }) {
             radius="xl"
             leftSection={<IconExternalLink size={18} />}
           >
-            Visit site
+            {t('projects.visitSite')}
           </Button>
         )}
         <Button
@@ -58,7 +60,7 @@ export function ProjectCard({ project }: { project: Project }) {
           radius="xl"
           leftSection={<IconMessageChatbot size={18} />}
         >
-          Ask the bot about it
+          {t('common.askBot')}
         </Button>
       </Group>
     </article>

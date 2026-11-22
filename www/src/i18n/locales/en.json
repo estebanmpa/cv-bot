@@ -1,0 +1,126 @@
+{
+  "common": {
+    "language": "Language",
+    "toggleColorScheme": "Toggle color scheme",
+    "askBot": "Ask the bot about it"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "chat": "Chat profile",
+    "contact": "Contact"
+  },
+  "landing": {
+    "availability": "Open to freelance & part-time",
+    "title": "From idea to <highlight>production</highlight>, end to end",
+    "intro": "I'm Esteban Piga Alessi, a fullstack developer with 20 years in tech and a strong backend focus. I build MVPs, APIs, integrations and AI features, and keep them running.",
+    "startProject": "Start a project",
+    "seeServices": "See my services",
+    "chatWithProfile": "Chat with my profile"
+  },
+  "services": {
+    "title": "How I can <highlight>help</highlight>",
+    "intro": "Freelance projects and part-time roles, for teams anywhere. I take ownership from the first conversation to production.",
+    "loadError": "The services couldn't be loaded. Please try again in a moment.",
+    "howIWork": "How I work",
+    "steps": {
+      "discovery": {
+        "title": "Discovery call",
+        "text": "A short call to understand the problem and the goal."
+      },
+      "proposal": {
+        "title": "Proposal",
+        "text": "Scope, milestones and a quote, so you know what to expect."
+      },
+      "build": {
+        "title": "Build",
+        "text": "Short iterations with demos you can try, not status reports."
+      },
+      "launch": {
+        "title": "Launch & support",
+        "text": "Deploy, handover docs, and help once it is live."
+      }
+    },
+    "callout": {
+      "title": "Have a project in mind?",
+      "text": "Tell me what you need and I'll get back to you with next steps."
+    }
+  },
+  "projects": {
+    "title": "Projects I'm <highlight>building</highlight>",
+    "intro": "Side projects I design, build and run end to end, from the architecture to the deploy.",
+    "loadError": "The projects couldn't be loaded. Please try again in a moment.",
+    "visitSite": "Visit site",
+    "status": {
+      "live": "Live",
+      "inDevelopment": "In development"
+    }
+  },
+  "contact": {
+    "title": "Let's build <highlight>something</highlight>",
+    "intro": "Tell me about your project or role. I read every message myself and reply with next steps, usually within one business day.",
+    "timezone": "Bariloche, Argentina (UTC−3), working with teams in any time zone",
+    "knowMore": "Want to know more first?",
+    "askProfileBot": "Ask my profile bot",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "projectType": "What do you need?",
+      "projectTypePlaceholder": "Pick one",
+      "message": "Tell me about it",
+      "messagePlaceholder": "What you want to build or fix, where it stands today and any deadline.",
+      "send": "Send message",
+      "quoteNote": "Every project is quoted after a short call about its scope.",
+      "success": "Thanks! Your message reached me. I usually reply within one business day.",
+      "unavailable": "Your message could not be delivered right now. Please try again or email me directly.",
+      "failed": "Your message couldn't be sent. Please try again in a moment."
+    },
+    "projectTypes": {
+      "new-product": "A new product or MVP",
+      "existing-product": "Work on an existing product",
+      "ai-integration": "AI integration",
+      "legacy-system": "Legacy system or database",
+      "part-time-role": "Part-time or contract role",
+      "other": "Something else"
+    },
+    "validation": {
+      "nameRequired": "Tell me your name",
+      "nameMax": "Keep it under {{max}} characters",
+      "emailInvalid": "Enter a valid email so I can reply",
+      "projectTypeRequired": "Pick the option that fits best",
+      "messageMin": "Add a few more details (at least {{min}} characters)",
+      "messageMax": "Keep it under {{max}} characters"
+    }
+  },
+  "chat": {
+    "windowLabel": "Chat with Esteban's assistant",
+    "welcome": "Hi 👋 I'm Esteban's virtual assistant. Ask me about his services, experience, or availability.",
+    "error": "I couldn't reach the bot. Please try again in a moment.",
+    "title": "Esteban's AI assistant",
+    "subtitle": "Online · Ask about services, experience or availability",
+    "suggestions": {
+      "services": "What services do you offer?",
+      "mvp": "Can you build an MVP for my idea?",
+      "experience": "Tell me about your experience"
+    },
+    "placeholder": "Ask me anything…",
+    "messageLabel": "Message",
+    "send": "Send message",
+    "openLink": "Open link",
+    "typing": "The assistant is typing",
+    "validation": {
+      "empty": "Write a message before sending",
+      "max": "Message can't exceed {{max}} characters"
+    }
+  },
+  "profile": {
+    "role": "Systems Analyst & Fullstack Developer",
+    "location": "Bariloche, Argentina",
+    "continueOnTelegram": "Continue on Telegram",
+    "preferTelegram": "Prefer Telegram?",
+    "scanTelegram": "Scan or open the chat on Telegram"
+  }
+}

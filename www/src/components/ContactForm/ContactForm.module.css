@@ -1,0 +1,31 @@
+.form {
+  composes: glass from '../../styles/glass.module.css';
+  padding: var(--mantine-spacing-xl);
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  @mixin hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(121, 53, 250, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit {
+    transition: none;
+
+    @mixin hover {
+      transform: none;
+    }
+  }
+}
