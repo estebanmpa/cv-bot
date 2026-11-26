@@ -37,6 +37,7 @@ export const PROJECTS: Project[] = [
             es: 'Proveedor de identidad OAuth 2.0 que maneja el inicio de sesión de todas mis apps.',
         },
         status: 'live',
+        url: 'https://myiamhub.xyz',
         highlights: {
             en: [
                 'Authorization Code flow with discovery, token exchange and user info',
@@ -105,6 +106,46 @@ Hexagonal architecture with use cases, TypeORM migrations, PDF export.`,
         suggestedQuestion: {
             en: 'What is Presupuestia and how does its AI budget drafting work?',
             es: '¿Qué es Presupuestia y cómo arma presupuestos con IA?',
+        },
+    },
+    {
+        slug: 'upwind-board',
+        name: 'Upwind Board',
+        tagline: {
+            en: 'Lesson log and IKO progression tracking for kitesurf instructors.',
+            es: 'Registro de clases y seguimiento de progresión IKO para instructores de kitesurf.',
+        },
+        status: 'live',
+        url: 'https://upwindboard.com',
+        highlights: {
+            en: [
+                'Lessons logged per student with kite, board, conditions and notes',
+                'Progression through the IKO skill tree, derived from every lesson',
+                'School management: students, instructors and equipment inventory',
+            ],
+            es: [
+                'Clases registradas por alumno con kite, tabla, condiciones y notas',
+                'Progresión por el árbol de habilidades IKO, calculada a partir de cada clase',
+                'Gestión de la escuela: alumnos, instructores e inventario de equipos',
+            ],
+        },
+        stack: ['NestJS', 'React', 'PostgreSQL', 'Redis', 'Docker', 'Nginx'],
+        details: `
+Started in 2026 and in production. A tool for IKO kitesurf instructors and schools.
+Instructors log each lesson with its students, and for every student mark the
+skills worked on (levels → skills → sub-skills of the IKO tree) as Introduced,
+Practiced or Mastered; the editor shows the last status recorded for each skill.
+A student's progression is never stored: it is derived from the latest status per
+skill across all their lessons. Includes a dashboard (lessons and hours this
+month, students, active instructors), student profiles with progression per level
+and lesson history, instructor management, an equipment inventory that can be
+assigned to lessons, and an editable skill tree. Sign-in goes through his own IAM,
+with sessions in Redis. Hexagonal architecture with use cases, TypeORM migrations,
+OpenAPI docs, React + Mantine frontend, deployed with Docker Compose and GitHub
+Actions behind an Nginx reverse proxy.`,
+        suggestedQuestion: {
+            en: 'What is Upwind Board and how does it track student progression?',
+            es: '¿Qué es Upwind Board y cómo sigue la progresión de los alumnos?',
         },
     },
 ];
